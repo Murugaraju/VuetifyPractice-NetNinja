@@ -1,6 +1,6 @@
 <template>
   <nav>
-         <v-navigation-drawer app  dark v-model="drawer" class="indigo lighten-1">
+         <v-navigation-drawer app  dark v-model="drawer" class="indigo">
              <v-col align="center" class="pt-5">
 
                      <v-avatar size="100">
@@ -8,17 +8,17 @@
                      </v-avatar>
                         <p class="white--text subheading mt-1">Super Ninja</p>
              </v-col>
-            <v-list class="indigo lighten-1">
+            <v-list class="indigo ">
 
             </v-list>
             <v-divider ></v-divider>
             <v-list 
             rounded
-            class="indigo lighten-1"
+            class="indigo"
 
             >
             <v-subheader>MENU</v-subheader>
-                <v-list-item-group v-model="item" color="green" >
+                <v-list-item-group v-model="item" color="yellow" >
                     <v-list-item 
                      v-for="(item,i) in items"
                      :key="i"
@@ -52,11 +52,42 @@
 
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn  depressed  >
+            <v-menu offset-y >
+            <template v-slot:activator="{ on }">
+                <v-btn
+                small
+                fab
+                class="grey lighten-4 grey--text"
+                depressed
+                dark
+                v-on="on"
+                >
+                <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-item
+                v-for="(item, index) in items"
+                :key="index"
+                @click="()=>{}"
+                >
+                <v-list-item-title>{{ item.text }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item
+                @click="()=>{}"
+                >
+                    
               
-              <span class="text-capitalize">Logout</span>
-              <v-icon right >mdi-logout</v-icon>
-          </v-btn>
+              <v-list-item-title class="red--text">
+                  <span>Logout</span>
+                  <v-icon right >mdi-logout</v-icon>
+              </v-list-item-title>
+              
+          
+                </v-list-item>
+            </v-list>
+            </v-menu>
+          
       </v-app-bar>
       </v-content>
      
