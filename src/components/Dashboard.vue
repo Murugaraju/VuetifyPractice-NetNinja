@@ -2,6 +2,32 @@
     <div class="dashboard">
          <h2 class="subheading grey--text ml-2">Dashboard</h2>
         <v-container class="my-5">
+          <v-row class="mb-3">
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn small v-on="on" @click="sort('title')" depressed  class="grey lighten-3 grey--text ml-3">
+                  <v-icon small left>mdi-folder</v-icon>
+                  
+                  <span class="caption text-lowercase">By project title</span>
+              
+                </v-btn>
+              </template>
+              <span>Sort by project title</span>
+            </v-tooltip>
+
+            <v-tooltip top>
+                <template v-slot:activator="{on}">
+                    <v-btn v-on="on" small depressed @click="sort('person')" class="grey lighten-3 grey--text ml-1">
+                      <v-icon small left>mdi-account</v-icon>
+                      
+                      <span class="caption text-lowercase">By project person</span>
+                    </v-btn>
+                </template>
+                <span>Sort by project name</span>
+            </v-tooltip>
+              
+
+          </v-row>
             <v-card flat class="mb-1"
             v-for="(project,i) in projects"
             :key='i' 
@@ -44,7 +70,13 @@ export default {
         { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
       ]
         }
-    }
+       
+    },
+     methods:{
+       sort(projectkey){
+         this.projects.sort((a,b)=>a[projectkey]<b[projectkey]?-1:1)
+       }
+        }
 
 }
 // below grid example which I worked on

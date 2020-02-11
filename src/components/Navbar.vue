@@ -1,17 +1,24 @@
 <template>
   <nav>
-         <v-navigation-drawer app   v-model="drawer" class="orange lighten-1">
-            <v-list class="orange lighten-1">
+         <v-navigation-drawer app  dark v-model="drawer" class="indigo lighten-1">
+             <v-col align="center" class="pt-5">
+
+                     <v-avatar size="100">
+                         <img src="/avatar-4.png" alt="">
+                     </v-avatar>
+                        <p class="white--text subheading mt-1">Super Ninja</p>
+             </v-col>
+            <v-list class="indigo lighten-1">
 
             </v-list>
             <v-divider ></v-divider>
             <v-list 
             rounded
-            class="orange lighten-1"
+            class="indigo lighten-1"
 
             >
             <v-subheader>MENU</v-subheader>
-                <v-list-item-group v-model="item" color="indigo" >
+                <v-list-item-group v-model="item" color="green" >
                     <v-list-item 
                      v-for="(item,i) in items"
                      :key="i"
@@ -40,7 +47,7 @@
           <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
           <v-toolbar-title >
               
-              <span class="text-uppercase grey--text">Todo</span>
+              <span class="text-uppercase grey--text">Thanks</span>
               <span >Ninja</span>
 
           </v-toolbar-title>
@@ -62,7 +69,7 @@ export default {
    name:'Navbar',
    data(){
        return{
-           drawer:true,
+           drawer:null,
            item: 0,
            items: [
                 { text: 'Dashboard', icon: 'mdi-view-dashboard', route:'/dashboard'},
@@ -73,9 +80,12 @@ export default {
    } ,
    watch:{
        item(){
-           console.log(this.drawer)
-    
-          this.drawer=!this.drawer
+           console.log('came in item')
+            if(this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl){
+                console.log('came in sm and xs')
+                //  this.drawer=!this.drawer
+            }
+         
     //        
        }
 
