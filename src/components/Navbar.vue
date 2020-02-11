@@ -33,7 +33,7 @@
             </v-list>
       </v-navigation-drawer>
         <v-content class="ma-0 pa-0">
-      <v-app-bar app flat >
+      <v-app-bar app flat  >
           <!-- <v-btn class="green lighten-3" fab depressed>
               <v-icon>mdi-home</v-icon>
               </v-btn> -->

@@ -19,7 +19,7 @@
                        <div class="caption grey--title">Due by</div>
                         <div>{{project.due}}</div>
                     </v-col>
-                    <v-col cols='4'  sm='4' md='2'>
+                    <v-col cols='12'  sm='4' md='2' align="right">
                            
                         <div class="right">
                             <v-spacer></v-spacer>
