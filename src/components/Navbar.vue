@@ -1,6 +1,13 @@
 <template>
   <nav>
          <v-navigation-drawer app  dark v-model="drawer" class="indigo">
+             <v-row justify="start" class="ml-1 mt-1">
+                 <v-btn @click="drawer=!drawer" depressed fab small class="indigo">
+                     <v-icon center>mdi-arrow-left</v-icon>
+                 </v-btn>
+
+             </v-row>
+            
              <v-col align="center" class="pt-5">
 
                      <v-avatar size="100">
@@ -8,6 +15,9 @@
                      </v-avatar>
                         <p class="white--text subheading mt-1">Super Ninja</p>
              </v-col>
+              <v-row justify="center" class="my-3">
+                 <Popup/>
+             </v-row>
             <v-list class="indigo ">
 
             </v-list>
@@ -96,8 +106,12 @@
 
 </template>
 <script>
+import Popup from './Popup';
 export default {
    name:'Navbar',
+   components:{
+       Popup
+   },
    data(){
        return{
            drawer:null,
