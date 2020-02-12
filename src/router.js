@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Dashboard from './components/Dashboard';
 import Projects from './components/Projects';
 import Team from './components/Team';
+import Todo from '@/components/Todo/Todo';
 Vue.use(VueRouter)
 
 const routes=[
@@ -31,6 +32,12 @@ const routes=[
         path:'/team',
         name:'team',
         component:Team
+    },
+    {
+        path:'/Todo',
+        name:'todo',
+        component:Todo,
+
     },
     {
         path:'**',

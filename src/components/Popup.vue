@@ -68,6 +68,7 @@ export default {
     computed:{
         formateDate(){
             if(this.date){
+                console.log('printing the data from date picket ',this.date, typeof this.date)
                 const [year, month, day] = this.date.split('-')
                 
                 return `${month}/${day}/${year}`

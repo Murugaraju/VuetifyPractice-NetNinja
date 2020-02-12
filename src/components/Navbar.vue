@@ -7,7 +7,7 @@
           </v-btn>
       </v-snackbar>
          <v-navigation-drawer app  dark v-model="drawer" class="indigo">
-             <v-row justify="start" class="ml-1 mt-1">
+             <v-row justify="start" class="ml-1 mt-1 hidden-md-and-up">
                  <v-btn @click="drawer=!drawer" depressed fab small class="indigo">
                      <v-icon center>mdi-arrow-left</v-icon>
                  </v-btn>
@@ -47,10 +47,24 @@
 
                         </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title v-text="item.text">home</v-list-item-title>
+                              
+                            <v-list-item-title v-text="item.text"></v-list-item-title>
+                            
                         </v-list-item-content>
                           
                        
+                    </v-list-item>
+                    <v-list-item redirect :to="'/Todo'">
+                        <v-list-item-icon>
+                            <v-icon>mdi-pencil</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-content>
+                           
+                           <v-badge color="purple" inline content="new">
+                                <v-list-item-title>Todos</v-list-item-title>
+                           </v-badge>
+                             
+                        </v-list-item-content>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
