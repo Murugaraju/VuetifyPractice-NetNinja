@@ -13,8 +13,8 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref='form'>
-                    <v-text-field v-model='title' prepend-icon="mdi-folder" :rules="titlerules" label="Title"></v-text-field>
-                    <v-textarea prepend-icon="mdi-pencil" label="Detail"></v-textarea>
+                    <v-text-field v-model='title' prepend-icon="mdi-folder" :rules="commonrules" label="Title"></v-text-field>
+                    <v-textarea v-model='detail' prepend-icon="mdi-pencil" :rules="commonrules" label="Detail"></v-textarea>
                     <v-menu>
                         <template v-slot:activator="{on}">
                             <v-text-field 
@@ -41,7 +41,7 @@
             <v-spacer></v-spacer>
              <v-card-actions>
                  <v-spacer></v-spacer>
-                        <v-btn depressed small @click="save">Add project</v-btn>
+                        <v-btn depressed small @click="save"  :loading="loading">Add project</v-btn>
                 </v-card-actions>
         </v-card>
 
@@ -58,9 +58,11 @@ export default {
         return{dailog:false,
         date:undefined,
         title:'',
-        titlerules:[
+        detail:'',
+        commonrules:[
             v=>v.length>=3||'Minimum length 3 required!'
-        ]
+        ],
+        loading:false
         }
     },
     computed:{
@@ -78,6 +80,12 @@ export default {
         save(){
             if(this.$refs.form.validate()){
                 console.log('came in after valid dation')
+                this.loading=true;
+                setTimeout(()=>{
+                    this.loading=false;
+                    this.dailog=false;
+                    this.$emit('projectAdded')
+                },4000)
             }
             console.log('came in saves')
         }

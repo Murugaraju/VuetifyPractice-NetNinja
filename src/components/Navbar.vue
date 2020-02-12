@@ -1,5 +1,11 @@
 <template>
   <nav>
+      <v-snackbar v-model='snackbar' top color="success ">
+          <span>Added project</span>
+          <v-btn @click="snackbar=false" depressed color="success" fab>
+              <v-icon>mdi-close</v-icon>
+          </v-btn>
+      </v-snackbar>
          <v-navigation-drawer app  dark v-model="drawer" class="indigo">
              <v-row justify="start" class="ml-1 mt-1">
                  <v-btn @click="drawer=!drawer" depressed fab small class="indigo">
@@ -16,7 +22,7 @@
                         <p class="white--text subheading mt-1">Super Ninja</p>
              </v-col>
               <v-row justify="center" class="my-3">
-                 <Popup/>
+                 <Popup  @projectAdded="snackbar=true" />
              </v-row>
             <v-list class="indigo ">
 
@@ -114,6 +120,7 @@ export default {
    },
    data(){
        return{
+           snackbar:false,
            drawer:null,
            item: 0,
            items: [
