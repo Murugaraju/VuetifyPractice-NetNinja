@@ -5,7 +5,8 @@ const state={
     loading:false,
     status:0,
     data:{
-       
+       todos:[],
+       cratenewsuccess:false,
     } ,//always the api success 2xx response,
     error:{
        
@@ -33,6 +34,7 @@ const actions={
         db.get('http://localhost:8000/todo/').then(
             (res)=>{
                 console.log('printing the response',res,typeof res)
+                commit('setTodolist',res.data)
                 commit('resetLoading')
             }
         ).
@@ -43,12 +45,32 @@ const actions={
 
             }
         )
+    },
+    todoCreate(context,data){
+        console.log('Came in todoCreate')
+        context.commit('setLoading')
+        db.post('http://localhost:8000/todo/',data).then(
+            (res)=>{
+                context.commit('newtodoPush',res.data)
+                context.commit('resetLoading')
+                console.log('printing response',res)
+            }
+        ).catch(
+            (error)=>{
+                
+                context.commit('resetLoading')
+                console.log('Came in error of axios',error)
+            }
+        )
     }
 }
 
 //mutation functions are immediate executable
 
 const mutations={
+    setTodolist(state,data){
+        state.data.todos=[...data]
+    },
     setLoading(state){
         console.log('came in setloading')
         state.loading=true
@@ -59,6 +81,14 @@ const mutations={
         console.log('came in resetloading')
         state.loading=false
         
+    },
+    newtodoPush(state,data){
+        console.log('updated data',data,typeof data)
+        let temp=[...state.data.todos]
+        temp.push(data)
+        state.data.todos=temp
+        
+        console.log('printing todos after update',temp)
     }
 }
 
