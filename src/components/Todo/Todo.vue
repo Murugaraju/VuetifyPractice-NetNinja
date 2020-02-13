@@ -7,6 +7,8 @@
         expetially <b>Karti</b> look into it
             </h4>
 
+            <v-btn block :loading="loading" outlined @click="todoListGet">Experiment</v-btn>
+
 
            <v-card>
                <v-row>
@@ -38,8 +40,26 @@
    </div>
 </template>
 <script>
+//mapping getters and actions from todostore
+import {mapGetters, mapActions} from 'vuex';
 export default {
-    name:'Todo'
+    name:'Todo',
+    date(){
+        return {
+
+        }
+    },
+    computed:{
+        ...mapGetters('Todostore',['loading','status','data','error'])
+    },
+    methods:{
+        ...mapActions('Todostore',['todoListGet'])
+    },
+    watch:{
+        loading(n,o){
+                console.log('loading new and old',n,o)
+        }
+    }
 }
 </script>
 <style scoped>

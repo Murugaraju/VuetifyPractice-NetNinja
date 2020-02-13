@@ -1,0 +1,71 @@
+import db from '../../axio';
+
+
+const state={
+    loading:false,
+    status:0,
+    data:{
+       
+    } ,//always the api success 2xx response,
+    error:{
+       
+    } //always the api 4xx and 5xx response
+    
+}
+
+
+const getters={
+    //mapping all state keys to respective components getters or extent of data of the componet
+    loading:state=>state.loading,
+    status:state=>state.status,
+    data:state=>state.data,
+    error:state=>state.error
+   
+}
+
+//function inside action take first arguement as context which is object
+// so you will use object destructuring get commit out of it.
+
+const actions={
+    todoListGet({commit}){
+        console.log("came in action")
+        commit('setLoading')
+        db.get('http://localhost:8000/todo/').then(
+            (res)=>{
+                console.log('printing the response',res,typeof res)
+                commit('resetLoading')
+            }
+        ).
+        catch(
+            (error)=>{
+                console.log('catching error ',error,typeof error)
+                commit('resetLoading')
+
+            }
+        )
+    }
+}
+
+//mutation functions are immediate executable
+
+const mutations={
+    setLoading(state){
+        console.log('came in setloading')
+        state.loading=true
+       
+        
+    },
+    resetLoading(state){
+        console.log('came in resetloading')
+        state.loading=false
+        
+    }
+}
+
+export const Todostore={
+    namespaced:true,
+    state,
+    getters,
+    actions,
+    mutations
+}
