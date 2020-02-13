@@ -1,6 +1,6 @@
 <template>
 
-    <v-dialog v-model='dailog' width="500"> 
+    <v-dialog v-model='dailog' width="600"> 
         <template v-slot:activator="{on}" >
             <v-btn v-on="on" depressed class="indigo">
                 <v-icon left small>mdi-folder</v-icon>

@@ -11,26 +11,34 @@
 
 
            <v-card>
+               
                <v-row>
                    <v-col cols="12" sm="12" md="5">
+                       <div class="caption grey--text">Title</div>
                        <v-btn block outlined >
                           todo tile goes here
                        </v-btn>
                    </v-col>
                    <v-col cols="12" sm="7" md="3">
+                       <div class="caption grey--text">urgency</div>
+
                          <v-btn block outlined >
                           urgency details here
                        </v-btn>
                    </v-col>
-                   <v-col col="9" sm="5" md="3">
-                         <v-btn block outlined >
-                             due date for the todo
-                       </v-btn>
+                   <v-col col="9" sm="5" md="2">
+                       <div class="caption grey--text">target date</div>
+
+                        <p>sample</p>
                    </v-col>
-                   <v-col cols="3" sm="12" md="1">
-                         <v-btn block outlined >
-                          btns
-                       </v-btn>
+                   <v-col cols="3" sm="12" md="2">
+                       <div class="caption grey--text">actions</div>
+                         <v-btn text icon   class="red--text ">
+                             <v-icon >mdi-delete</v-icon>
+                         </v-btn>
+                          <v-btn text icon  class="primary--text">
+                             <v-icon >mdi-pencil</v-icon>
+                         </v-btn>
                    </v-col>
 
                    
