@@ -15,7 +15,10 @@
                 </v-col>
             </v-row>
             <v-row justify="end" class="pr-3">
-                <TodoCreateDialog/>
+<!--                
+                <div v-if="newCreateDialog"> -->
+                    <TodoCreateDialog/>
+                <!-- </div> -->
             </v-row>
            
             <div>
@@ -73,7 +76,7 @@ export default {
     },
     data(){
         return {
-            
+                newCreateDialog:false,
                 todos:[
                 {
                     "id": 1,

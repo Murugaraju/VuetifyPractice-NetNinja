@@ -11,7 +11,7 @@
                 <v-form :ref="'todoform'">
                     <v-text-field
                     v-model="todocreate.title"  
-                    :rules="[(v)=>v.length>=3?true:'Minimum 3 character length required!']"
+                    :rules="[(v)=>v.length>=3?true:'Minimum 3 character length required!',]"
                     prepend-icon="mdi-alarm" 
                     label="Title">
                     </v-text-field>
@@ -26,10 +26,10 @@
                     <v-menu>
                         <template v-slot:activator="{on}">
                             <v-text-field 
-                            :rules="[(v)=>v.length>=3||'Select the target date!']"
+                            :rules="[(v)=>v!=undefined||'Select the target date!']"
                             readonly 
                             label="Target date" 
-                            :value="todocreate.target_date" 
+                            v-model="todocreate.target_date" 
                             v-on="on" 
                             prepend-icon="mdi-calendar"
                             hint="yyyy-mm-dd"
@@ -45,7 +45,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn
-                        :loading="loading"
+                        :loading="createLoading"
                          @click="save" dark depressed class="primary">Create</v-btn>
                         <v-btn @click="dialog=!dialog" outlined>Cancel</v-btn>
                         
@@ -63,7 +63,7 @@ export default {
     data(){
         return{
             dialog:false,
-            
+            createLoading:false,
             urgencyItems:['Normal','Medium','Immediate'],
             todocreate:{
                 title:'',
@@ -73,13 +73,15 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('Todostore',['loading','status','error','data'])
+        ...mapGetters('Todostore',['loading','status','error','data','created'])
     },
     methods:{
-        ...mapActions('Todostore',['todoCreate']),
+        ...mapActions('Todostore',['todoCreate','resetCreated']),
         save(){
                 if(this.$refs.todoform.validate()){
                     console.log("printinf form",this.todocreate)
+                    //loading animation for create
+                    this.createLoading=true;
                     const mapper={
                         Normal:'NR',
                         Immediate:'IM',
@@ -90,6 +92,33 @@ export default {
                 }
                 
         }
+    },
+    watch:{
+        created(newValue){
+            if(newValue==true){
+                
+                //stop animation loading
+                this.createLoading=false
+
+                this.dialog=false
+                // setTimeout(()=>{this.resetCreated()},500)
+                this.$refs.todoform.reset();
+                //seting todocreate to default
+                this.todocreate={
+                                    title:'',
+                                    urgency:'Normal',
+                                    target_date:''
+                                }
+                console.log('printing todo form after reset',this.todocreate)
+                //Todo store setting created bolian false and this watched wonts do because,
+                // we are checking new value change that to true only
+                this.resetCreated()
+              
+            }
+        }
+    },
+    mounted(){
+        console.log('TodoCreateDialog mounted',this)
     }
 }
 </script>

@@ -4,9 +4,10 @@ import db from '../../axio';
 const state={
     loading:false,
     status:0,
+    created:false,
     data:{
        todos:[],
-       cratenewsuccess:false,
+       
     } ,//always the api success 2xx response,
     error:{
        
@@ -19,6 +20,7 @@ const getters={
     //mapping all state keys to respective components getters or extent of data of the componet
     loading:state=>state.loading,
     status:state=>state.status,
+    created:state=>state.created,
     data:state=>state.data,
     error:state=>state.error
    
@@ -48,11 +50,11 @@ const actions={
     },
     todoCreate(context,data){
         console.log('Came in todoCreate')
-        context.commit('setLoading')
+        
         db.post('http://localhost:8000/todo/',data).then(
             (res)=>{
                 context.commit('newtodoPush',res.data)
-                context.commit('resetLoading')
+                
                 console.log('printing response',res)
             }
         ).catch(
@@ -62,6 +64,9 @@ const actions={
                 console.log('Came in error of axios',error)
             }
         )
+    },
+    resetCreated(context,input){
+        context.commit('resetCreated',input)
     }
 }
 
@@ -87,8 +92,11 @@ const mutations={
         let temp=[...state.data.todos]
         temp.push(data)
         state.data.todos=temp
-        
+        state.created=true
         console.log('printing todos after update',temp)
+    },
+    resetCreated(state){
+        state.created=false
     }
 }
 
